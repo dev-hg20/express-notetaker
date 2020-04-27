@@ -15,4 +15,6 @@ router.post("/notes", function (req, res) {
     });
 });
 
+router.delete("/notes/:id", function (req, res) {});
+
 module.exports = router;

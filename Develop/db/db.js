@@ -1,8 +1,13 @@
 const fs = require("fs");
 const util = require("util");
+const uuid = require("uuid/v4");
 
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
+
+// const noteX = {"title":"Test Title","text":"Test text"}
+
+// ...nodeX = "title":"Test Title","text":"Test text"
 
 class DB {
   read() {
@@ -14,9 +19,13 @@ class DB {
   }
 
   addNote(note) {
+    const completedNote = {
+      ...note,
+      id: uuid(),
+    };
     return this.read().then((notes) => {
       const noteObj = JSON.parse(notes);
-      noteObj.push(note);
+      noteObj.push(completedNote);
       return this.write(noteObj);
     });
   }
