@@ -40,6 +40,13 @@ class DB {
         console.log(err);
       });
   }
+
+  deleteNote(id) {
+    return this.getNotes().then((notes) => {
+      const result = notes.filter((note) => note.id !== id);
+      return this.write(result);
+    });
+  }
 }
 
 module.exports = new DB();

@@ -15,6 +15,10 @@ router.post("/notes", function (req, res) {
     });
 });
 
-router.delete("/notes/:id", function (req, res) {});
+router.delete("/notes/:id", function (req, res) {
+  db.deleteNote(req.params.id)
+    .then(() => res.json({ deleted: true }))
+    .catch((err) => res.status(500).json(err));
+});
 
 module.exports = router;
